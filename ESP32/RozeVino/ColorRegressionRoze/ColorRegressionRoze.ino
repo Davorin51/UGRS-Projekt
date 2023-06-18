@@ -48,9 +48,13 @@ float z = 2582;  // Input value for feature z
 
   float input[3] = { standardized_x, standardized_y, standardized_z };
 
+double start_time = micros();  // Start the timer
 float y_pred = ColorRegressionNN_RGB_Roze.predict(input);
+double end_time = micros();  // Stop the timer
 float y_pred_orig = y_pred * std_dev_y + mean_y;
+double inference_time = (end_time - start_time) / 1e6;
 
+Serial.printf("Vrijeme %6f", inference_time);
 Serial.print("\t predicted: ");
 Serial.println(y_pred_orig);
 
